@@ -1,8 +1,8 @@
 Ansible Playbook  to check CPU & RAM usage
 
-This playbook will  get CPU & RAM usage of servers and write output to a file.This playbook will invoke shell script "script.sh" where we are taking details of cpu & memory.
+Ansible playbook "cpu_mem.yml" will get CPU and RAM usage  of servers and output will write in to log. 
 
-Shell script will check cpu & memory usage of servers 
+Shell script "script.sh" will check cpu & memory usage of servers. 
 
 To run playbook use below command
 

@@ -1,5 +1,5 @@
 ---
- - hosts: all
+ - hosts: all,localhost
    tasks:
     - name: Truncate logs
       file:
@@ -8,7 +8,7 @@
       delegate_to: 127.0.0.1 
     
     - name: runing script in servers        
-      script: /home/premdas/script.sh
+      script: /home/premdas/Music/test/ansible-test/cpu_mem_check/
       register: top
 
     - name: copy script output to files 
