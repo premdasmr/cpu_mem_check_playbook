@@ -1,0 +1,25 @@
+---
+ - hosts: all
+   tasks:
+    - name: Truncate logs
+      file:
+       path: /home/premdas/output
+       state: absent    
+      delegate_to: 127.0.0.1 
+    
+    - name: runing script in servers        
+      script: /home/premdas/script.sh
+      register: top
+
+    - name: copy script output to files 
+      lineinfile:
+        line: "{{ansible_hostname}},{{top.stdout}}"
+        dest: "/home/premdas/output"
+        create: yes
+      when: top.stdout.find("ALERT") != -1
+      delegate_to : localhost
+
+    - name: Print result 
+      debug:
+       var: "{{ansible_hostname}},{{top.stdout}}"
+
