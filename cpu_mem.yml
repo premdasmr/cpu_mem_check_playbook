@@ -1,20 +1,20 @@
 ---
- - hosts: all,localhost
+ - hosts: all
    tasks:
     - name: Truncate logs
       file:
-       path: /home/premdas/output
+       path: /path/to/output
        state: absent    
-      delegate_to: 127.0.0.1 
+      delegate_to: localhost
     
     - name: runing script in servers        
-      script: /home/premdas/Music/test/ansible-test/cpu_mem_check/
+      script: /path/to/script/<script.sh>
       register: top
 
     - name: copy script output to files 
       lineinfile:
         line: "{{ansible_hostname}},{{top.stdout}}"
-        dest: "/home/premdas/output"
+        dest: "/path/to/output"
         create: yes
       when: top.stdout.find("ALERT") != -1
       delegate_to : localhost
